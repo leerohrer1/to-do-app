@@ -1,0 +1,20 @@
+<section class="item">
+  <input [id]="item.description" type="checkbox" (change)="item.complete = !item.complete" [checked]="item.complete" />
+  <label [for]="item.description">{{item.description}}</label>
+
+  <section class="btn-wrapper" *ngIf="!editable">
+    <button class="btn-edit" (click)="editable = !editable">Edit</button>
+    <button class="btn btn-warn" (click)="remove.emit()">Delete</button>
+  </section>
+
+  <!-- (conditional) Edit button -->
+  <section *ngIf="editable">
+    <input class="sm-text-input" placeholder="edit item" [value]="item.description" #editedItem (keyup.enter)="saveItem(editedItem.value)">
+
+    <section class="btn-wrapper">
+      <button class="btn-edit" (click)="editable = !editable">Cancel</button>
+      <button class="btn btn-save" (click)="saveItem(editedItem.value)">Save</button>
+    </section>
+  </section>
+
+</section>
